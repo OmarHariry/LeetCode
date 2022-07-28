@@ -17,7 +17,7 @@ public:
                         ans.push_back(triplet);
                         
                     }
-                    ++j;
+                    ++j;--k;
                 }
                 else if(nums[i] + nums[j] + nums[k] < 0)
                     ++j;
