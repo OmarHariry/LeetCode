@@ -11,18 +11,25 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode*curr,*prev,*next;
+        ListNode*dummy = new ListNode(-1);
+        ListNode*it = dummy;
         
-        curr = head;
-        prev = next = NULL;
-        
-        while(curr){
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
+        stack<int>myStack;
+        while(head){
+            myStack.push(head->val);
+            head = head->next;
         }
         
-        return prev;
+        while(!myStack.empty()){
+            int top = myStack.top();
+            myStack.pop();
+            ListNode*temp = new ListNode(top);
+            it -> next = temp;
+            it = it->next;
+        }
+        
+        return dummy->next;
+        
+        
     }
 };
