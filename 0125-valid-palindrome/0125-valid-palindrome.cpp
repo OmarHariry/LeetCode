@@ -1,23 +1,18 @@
 class Solution {
 public:
-    string convertString(string s) {
-        string word = "";
-        for(char c : s) {
-            if (isalpha(c) || isdigit(c))
-                word += tolower(c);
-        }
-        return word;
-    }
     bool isPalindrome(string s) {
-        string word = convertString(s);
-        
-        int left = 0, right = word.size() - 1;
-        while (left <= right) {
-            if(word[left] != word[right])
+        int left = 0, right = s.length() - 1;
+        while(left <= right) {
+            if(!isalnum(s[left]))
+                ++left;
+            else if(!isalnum(s[right]))
+                --right;
+            else if(tolower(s[left]) != tolower(s[right]))
                 return false;
-            ++left, -- right;
+            else {
+                ++left, --right;
+            }
         }
-        
         return true;
     }
 };
