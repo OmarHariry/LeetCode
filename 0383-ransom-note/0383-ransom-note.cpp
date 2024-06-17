@@ -1,14 +1,12 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        vector<int>freq1(26,0);
-        vector<int>freq2(26,0);
-        
-        for(char c : ransomNote) freq1[c-'a']++;
-        for(char c : magazine) freq2[c-'a']++;
+        vector<int>freq(26,0);
+        for(char c : magazine) freq[c-'a']++;
+        for(char c : ransomNote) freq[c-'a']--;
         
         for(int i=0;i<26;++i){
-            if(freq1[i] > freq2[i])
+            if(freq[i] < 0)
                 return false;
         }
         return true;
