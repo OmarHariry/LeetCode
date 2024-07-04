@@ -46,8 +46,8 @@ public:
                     }
                 }
             }
-            if (flag) ++minutes;
+            ++minutes;
         }
-        return fresh == 0 ? minutes : -1;
+        return fresh == 0 ? minutes - 1 : -1;
     }
 };
