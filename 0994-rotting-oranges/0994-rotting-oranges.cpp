@@ -24,7 +24,6 @@ public:
 
         vector<int> DIR = { 0, 1, 0, -1, 0 };
         while (!q.empty()) {
-            bool flag = false;
             int size = q.size();
             
             while(size--) {
@@ -39,7 +38,6 @@ public:
                         || visited[nr][nc] == 1 || grid[nr][nc] == 0)
                         continue;
                     if (grid[nr][nc] == 1) {
-                        flag = true;
                         --fresh;
                         grid[nr][nc] = 2;
                         q.push({ nr, nc });
