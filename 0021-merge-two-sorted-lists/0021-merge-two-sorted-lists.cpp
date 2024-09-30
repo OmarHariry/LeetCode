@@ -8,37 +8,34 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+class comp {
+public:
+    bool operator()(ListNode* a, ListNode*b) {
+        return a->val > b->val;
+    }    
+};
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        ListNode* dummy, *curr;
-        dummy = new ListNode(-1);
+        priority_queue<ListNode*, vector<ListNode*>, comp> pq;
+        ListNode* curr = list1;
+        while (curr) {
+            pq.push(curr);
+            curr = curr->next;
+        }
+        curr = list2;
+        while (curr) {
+            pq.push(curr);
+            curr = curr->next;
+        }
+        ListNode* dummy = new ListNode(-1);
         curr = dummy;
-        
-        ListNode* left, *right;
-        left = list1, right = list2;
-        
-        while(left && right) {
-            if(left->val < right->val) {
-                curr->next = left;
-                left = left->next;
-            } else {
-                curr->next = right;
-                right = right->next;
-            }
+        while(!pq.empty()) {
+            curr->next= pq.top();
+            pq.pop();
             curr = curr->next;
         }
-        while (left) {
-            curr->next = left;
-            curr = curr->next;
-            left = left->next;
-        }
-        
-        while (right) {
-            curr->next = right;
-            curr = curr->next;
-            right = right->next;
-        }
+        curr->next = nullptr;
         return dummy->next;
     }
 };
